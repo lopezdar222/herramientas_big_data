@@ -38,13 +38,16 @@ Se puede utilizar el entorno docker-compose-v1.yml
 Copiar los archivos ubicados en la carpeta Datasets, dentro del contenedor "namenode"
 
 ```
-  docker cp <path><archivo> namenode:<path>/<archivo>
+  sudo docker exec -it namenode bash
+  mkdir Datasets
+  exit
+  sudo docker cp <path><archivo> namenode:<path>/<archivo>
 ```
 
 Ubicarse en el contenedor "namenode"
 
 ```
-  docker exec -it namenode bash
+  sudo docker exec -it namenode bash
 ```
 
 Crear un directorio en HDFS llamado "/data".
