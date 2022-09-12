@@ -26,7 +26,9 @@ Neo4j: http://<IP_Anfitrion>:7474
 
 Para implementar ejecute
 ```
-  docker-compose -f docker-compose-vX.yml up -d
+  git clone https://github.com/lopezdar222/herramientas_big_data
+  cd herramientas_big_data
+  sudo docker-compose -f docker-compose-vX.yml up -d
 ```
 
 ## 1) HDFS
