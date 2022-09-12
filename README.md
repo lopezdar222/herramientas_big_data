@@ -31,7 +31,7 @@ Para implementar ejecute
   sudo docker-compose -f docker-compose-vX.yml up -d
 ```
 
-## 1) HDFS cambvio
+## 1) HDFS
 
 Se puede utilizar el entorno docker-compose-v1.yml
 
