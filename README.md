@@ -70,8 +70,11 @@ Se puede utilizar el entorno docker-compose-v2.yml
 
 Crear tablas en Hive, a partir de los csv ingestados en HDFS.
 
+Para esto, se puede ubicar dentro del contenedor correspondiente al servidor de Hive, y ejecutar desdea allí los scripts necesarios
+
 ```
   sudo docker exec -it hive-server bash
+  hive
 ```
 
 Este proceso de creación las tablas debe poder ejecutarse desde un shell script.
