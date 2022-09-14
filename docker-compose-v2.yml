@@ -68,9 +68,7 @@ services:
       - datanode
     env_file:
       - ./hadoop-hive.env
-    command:
-      - /opt/hive/bin/hiveserver2
-      - /opt/hive/bin/beeline -u jdbc:hive2://localhost:10000 -n root
+    command: /opt/hive/bin/hiveserver2
     environment:
       HIVE_CORE_CONF_javax_jdo_option_ConnectionURL: "jdbc:postgresql://hive-metastore/metastore"
       SERVICE_PRECONDITION: "hive-metastore:9083"
