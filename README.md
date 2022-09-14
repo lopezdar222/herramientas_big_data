@@ -63,3 +63,10 @@ Copiar los archivos csv provistos a HDFS:
 ```
 
 Este proceso de creación de la carpeta data y copiado de los arhivos, debe poder ejecutarse desde un shell script.
+
+## 2) Hive
+
+Se puede utilizar el entorno docker-compose-v2.yml
+
+Crear tablas en Hive, a partir de los csv ingestados en HDFS.
+Este proceso de creación las tablas debe poder ejecutarse desde un shell script.
