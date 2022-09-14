@@ -69,4 +69,13 @@ Este proceso de creación de la carpeta data y copiado de los arhivos, debe pode
 Se puede utilizar el entorno docker-compose-v2.yml
 
 Crear tablas en Hive, a partir de los csv ingestados en HDFS.
+
+```
+  sudo docker exec -it hive-server bash
+  cd home
+  mkdir Datasets
+  exit
+  sudo docker cp <path><archivo> namenode:/home/Datasets/<archivo>
+```
+
 Este proceso de creación las tablas debe poder ejecutarse desde un shell script.
