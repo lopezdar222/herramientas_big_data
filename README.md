@@ -335,7 +335,46 @@ Instrucciones:
 
 Se pueden utilizar los entornos docker-compose-v4.yml y docker-compose-kafka.yml
 
-#### 1) Kafka		
+### 1) Spark y Scala:
+
+Ubicarse en la línea de comandos del Spark master y comenzar PySpark.
+```
+  docker exec -it spark-master bash
+  /spark/bin/pyspark --master spark://spark-master:7077
+```
+
+Cargar raw-flight-data.csv desde HDFS.
+```
+	flightSchema = StructType([
+	StructField("DayofMonth", IntegerType(), False),
+	StructField("DayOfWeek", IntegerType(), False),
+	StructField("Carrier", StringType(), False),
+	StructField("OriginAirportID", IntegerType(), False),
+	StructField("DestAirportID", IntegerType(), False),
+	StructField("DepDelay", IntegerType(), False),
+	StructField("ArrDelay", IntegerType(), False),
+	]);
+
+	flights = spark.read.csv('hdfs://namenode:9000/data/flights/raw-flight-data.csv', schema=flightSchema, header=True)
+  
+  	flights.show()
+```
+
+Ubicarse en la línea de comandos del Spark master y comenzar Scala.
+```
+  docker exec -it spark-master bash
+  spark/bin/spark-shell --master spark://spark-master:7077
+```
+
+Cargar raw-flight-data.csv desde HDFS.
+```
+	case class flightSchema(DayofMonth:String, DayOfWeek:String, Carrier:String, OriginAirportID:String, DestAirportID:String, DepDelay:String, ArrDelay:String)
+	val flights = spark.read.format("csv").option("sep", ",").option("header", "true").load("hdfs://namenode:9000/data/flights/raw-flight-data.csv").as[flightSchema]
+
+  	flights.show()
+```
+
+#### 2) Kafka		
 ```		
 			sudo docker-compose up -d
 			sudo docker exec -it kafka_container bash
@@ -366,7 +405,7 @@ Se pueden utilizar los entornos docker-compose-v4.yml y docker-compose-kafka.yml
 			docker-compose exec kafka kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic TenMinPsgCnts --from-beginning
 ```	
 
-#### 2) Comparativa Dataset y Dataframe en Scala:
+#### 3) Comparativa Dataset y Dataframe en Scala:
 
 ```	
     sudo docker cp pruebaPySpark.py spark-master:pruebaPySpark.py
