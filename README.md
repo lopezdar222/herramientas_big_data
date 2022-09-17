@@ -345,6 +345,8 @@ Ubicarse en la línea de comandos del Spark master y comenzar PySpark.
 
 Cargar raw-flight-data.csv desde HDFS.
 ```
+	from pyspark.sql.types import *
+
 	flightSchema = StructType([
 	StructField("DayofMonth", IntegerType(), False),
 	StructField("DayOfWeek", IntegerType(), False),
@@ -358,6 +360,32 @@ Cargar raw-flight-data.csv desde HDFS.
 	flights = spark.read.csv('hdfs://namenode:9000/data/flights/raw-flight-data.csv', schema=flightSchema, header=True)
   
   	flights.show()
+	  +----------+---------+-------+---------------+-------------+--------+--------+
+|DayofMonth|DayOfWeek|Carrier|OriginAirportID|DestAirportID|DepDelay|ArrDelay|
++----------+---------+-------+---------------+-------------+--------+--------+
+|        19|        5|     DL|          11433|        13303|      -3|       1|
+|        19|        5|     DL|          14869|        12478|       0|      -8|
+|        19|        5|     DL|          14057|        14869|      -4|     -15|
+|        19|        5|     DL|          15016|        11433|      28|      24|
+|        19|        5|     DL|          11193|        12892|      -6|     -11|
+|        19|        5|     DL|          10397|        15016|      -1|     -19|
+|        19|        5|     DL|          15016|        10397|       0|      -1|
+|        19|        5|     DL|          10397|        14869|      15|      24|
+|        19|        5|     DL|          10397|        10423|      33|      34|
+|        19|        5|     DL|          11278|        10397|     323|     322|
+|        19|        5|     DL|          14107|        13487|      -7|     -13|
+|        19|        5|     DL|          11433|        11298|      22|      41|
+|        19|        5|     DL|          11298|        11433|      40|      20|
+|        19|        5|     DL|          11433|        12892|      -2|      -7|
+|        19|        5|     DL|          10397|        12451|      71|      75|
+|        19|        5|     DL|          12451|        10397|      75|      57|
+|        19|        5|     DL|          12953|        10397|      -1|      10|
+|        19|        5|     DL|          11433|        12953|      -3|     -10|
+|        19|        5|     DL|          10397|        14771|      31|      38|
+|        19|        5|     DL|          13204|        10397|       8|      25|
++----------+---------+-------+---------------+-------------+--------+--------+
+only showing top 20 rows
+  	flights.describe()
 ```
 
 Ubicarse en la línea de comandos del Spark master y comenzar Scala.
@@ -372,6 +400,32 @@ Cargar raw-flight-data.csv desde HDFS.
 	val flights = spark.read.format("csv").option("sep", ",").option("header", "true").load("hdfs://namenode:9000/data/flights/raw-flight-data.csv").as[flightSchema]
 
   	flights.show()
+
++----------+---------+-------+---------------+-------------+--------+--------+
+|DayofMonth|DayOfWeek|Carrier|OriginAirportID|DestAirportID|DepDelay|ArrDelay|
++----------+---------+-------+---------------+-------------+--------+--------+
+|        19|        5|     DL|          11433|        13303|      -3|       1|
+|        19|        5|     DL|          14869|        12478|       0|      -8|
+|        19|        5|     DL|          14057|        14869|      -4|     -15|
+|        19|        5|     DL|          15016|        11433|      28|      24|
+|        19|        5|     DL|          11193|        12892|      -6|     -11|
+|        19|        5|     DL|          10397|        15016|      -1|     -19|
+|        19|        5|     DL|          15016|        10397|       0|      -1|
+|        19|        5|     DL|          10397|        14869|      15|      24|
+|        19|        5|     DL|          10397|        10423|      33|      34|
+|        19|        5|     DL|          11278|        10397|     323|     322|
+|        19|        5|     DL|          14107|        13487|      -7|     -13|
+|        19|        5|     DL|          11433|        11298|      22|      41|
+|        19|        5|     DL|          11298|        11433|      40|      20|
+|        19|        5|     DL|          11433|        12892|      -2|      -7|
+|        19|        5|     DL|          10397|        12451|      71|      75|
+|        19|        5|     DL|          12451|        10397|      75|      57|
+|        19|        5|     DL|          12953|        10397|      -1|      10|
+|        19|        5|     DL|          11433|        12953|      -3|     -10|
+|        19|        5|     DL|          10397|        14771|      31|      38|
+|        19|        5|     DL|          13204|        10397|       8|      25|
++----------+---------+-------+---------------+-------------+--------+--------+
+only showing top 20 rows
 ```
 
 #### 2) Kafka		
