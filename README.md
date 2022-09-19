@@ -14,6 +14,7 @@ Es importante mencionar que el entorno completo consume muchos recursos de su eq
 
 Ejecute `docker network inspect` en la red (por ejemplo, `docker-hadoop-spark-hive_default`) para encontrar la IP en la que se publican las interfaces de hadoop. Acceda a estas interfaces con las siguientes URL:
 
+```
 Namenode: http://<IP_Anfitrion>:9870/dfshealth.html#tab-overview
 Datanode: http://<IP_Anfitrion>:9864/
 Spark master: http://<IP_Anfitrion>:8080/
@@ -23,6 +24,7 @@ HBase Zookeeper_Dump: http://<IP_Anfitrion>:16010/zk.jsp
 HBase Region_Server: http://<IP_Anfitrion>:16030
 Zeppelin: http://<IP_Anfitrion>:8888
 Neo4j: http://<IP_Anfitrion>:7474
+```
 
 Para implementar ejecute
 ```
