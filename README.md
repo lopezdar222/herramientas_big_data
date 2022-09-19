@@ -475,3 +475,7 @@ only showing top 20 rows
 		/spark/bin/pyspark --master spark://spark-master:7077
 		/spark/bin/spark-shell --master spark://spark-master:7077
 ```	
+
+#### 4) ETL con Spark
+
+A partir de la tabla venta generada en Parqet, realizar el proceso de filtrado de valores outliers utilizando Spark.
