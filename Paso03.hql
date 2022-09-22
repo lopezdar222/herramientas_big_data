@@ -174,8 +174,8 @@ SELECT
 	Telefono,
 	Edad,
 	Localidad,
-	Y,
-	X
+	REPLACE(Y, ',', '.'),
+	REPLACE(X, ',', '.')
 FROM integrador.cliente;
 
 DROP TABLE IF EXISTS producto;
@@ -198,7 +198,7 @@ SELECT
 	IdProducto,
 	Concepto,
 	Tipo,
-	Precio
+	REPLACE(Precio, ',', '.')
 FROM integrador.producto;
 
 DROP TABLE IF EXISTS empleado;
@@ -230,7 +230,7 @@ SELECT
 	Sucursal,
 	Sector,
 	Cargo,
-	Salario
+	REPLACE(Salario. ',', '.')
 FROM integrador.empleado;
 
 DROP TABLE IF EXISTS sucursal;
@@ -254,8 +254,8 @@ SELECT
 	Domicilio,
 	Localidad,
 	Provincia,
-	Latitud,
-	Longitud
+	REPLACE(Latitud, ',', '.'),
+	REPLACE(Longitud, ',', '.')
 FROM integrador.sucursal;
 
 DROP TABLE IF EXISTS calendario;
