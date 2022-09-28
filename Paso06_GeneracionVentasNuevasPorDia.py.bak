@@ -14,8 +14,6 @@ spark = SparkSession.\
         config("spark.executor.memory", "512m").\
         getOrCreate()
 
-venta = spark.read.option("compression.codec", "snappy").option("mergeSchema", "true").parquet("hdfs://namenode:9000/data2/venta")
-
 cliente = spark.read.csv(path="hdfs://namenode:9000/data_nvo/Cliente.csv", inferSchema=True, sep=";", header=True)
 
 empleado = spark.read.csv(path="hdfs://namenode:9000/data_nvo/Empleado.csv", inferSchema=True, sep=",", header=True)

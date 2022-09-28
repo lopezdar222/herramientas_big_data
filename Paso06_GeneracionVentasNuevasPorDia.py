@@ -18,7 +18,7 @@ cliente = spark.read.csv(path="hdfs://namenode:9000/data_nvo/Cliente.csv", infer
 
 empleado = spark.read.csv(path="hdfs://namenode:9000/data_nvo/Empleado.csv", inferSchema=True, sep=",", header=True)
 
-producto = spark.read.csv(path="hdfs://namenode:9000/data_nvo/Producto.csv", inferSchema=True, sep=",", header=True
+producto = spark.read.csv(path="hdfs://namenode:9000/data_nvo/Producto.csv", inferSchema=True, sep=",", header=True)
 
 cliente.createOrReplaceTempView("cliente")
 
