@@ -2,6 +2,15 @@ from pyspark.sql import *
 from pyspark.sql.types import *
 from pyspark.sql.functions import *
 
+from pyspark.sql import SparkSession
+
+spark = SparkSession.\
+        builder.\
+        appName("prueba-pyspark").\
+        master("spark://spark-master:7077").\
+        config("spark.executor.memory", "512m").\
+        getOrCreate()
+        
 venta = spark.read.option("compression.codec", "snappy").option("mergeSchema", "true").parquet("hdfs://namenode:9000/data2/venta_sin_outliers")
 
 venta_nvo = spark.read.csv(path="hdfs://namenode:9000/data_nvo/venta_nvo", inferSchema=True, sep=",", header=True)
@@ -26,4 +35,4 @@ venta_nvo = venta_nvo.select("idventa","fecha","fecha_entrega","idcanal","idclie
 
 venta = venta.union(venta_nvo)
 
-venta.repartition(1).write.option("compression.codec", "snappy").option("mergeSchema", "true").parquet("hdfs://namenode:9000/data2/venta_sin_outliers", mode="overwrite")
+venta.repartition(1).write.option("compression.codec", "snappy").option("mergeSchema", "true").parquet("hdfs://namenode:9000/data2/venta_incremental")
