@@ -2,7 +2,7 @@ CREATE DATABASE IF NOT EXISTS integrador2;
 USE integrador2;
 
 DROP TABLE IF EXISTS compra;
-CREATE EXTERNAL TABLE IF NOT EXISTS compra (
+CREATE TABLE IF NOT EXISTS compra (
   IdCompra				INTEGER,
   Fecha 				DATE,
   IdProducto			INTEGER,
@@ -26,7 +26,7 @@ FROM
     integrador.compra;
 
 DROP TABLE IF EXISTS gasto;
-CREATE EXTERNAL TABLE IF NOT EXISTS gasto (
+CREATE TABLE IF NOT EXISTS gasto (
   IdGasto				INTEGER,
   IdSucursal			INTEGER,
   Fecha 				DATE,
@@ -78,7 +78,7 @@ FROM integrador.gasto
 WHERE IdTipoGasto=4;
 
 DROP TABLE IF EXISTS tipo_gasto;
-CREATE EXTERNAL TABLE IF NOT EXISTS tipo_gasto (
+CREATE TABLE IF NOT EXISTS tipo_gasto (
   IdTipoGasto			INTEGER,
   Descripcion			VARCHAR(50),
   Monto_Aproximado	    FLOAT
@@ -95,7 +95,7 @@ SELECT
 FROM integrador.tipo_gasto;
 
 DROP TABLE IF EXISTS venta;
-CREATE EXTERNAL TABLE IF NOT EXISTS venta (
+CREATE TABLE IF NOT EXISTS venta (
   IdVenta				INTEGER,
   Fecha 				DATE,
   Fecha_Entrega 		DATE,
@@ -126,7 +126,7 @@ SELECT
 FROM integrador.venta;
 
 DROP TABLE IF EXISTS canal_venta;
-CREATE EXTERNAL TABLE IF NOT EXISTS canal_venta (
+CREATE TABLE IF NOT EXISTS canal_venta (
   IdCanal				INTEGER,
   Canal 				VARCHAR(50)
 )
@@ -141,7 +141,7 @@ SELECT
 FROM integrador.canal_venta;
 
 DROP TABLE IF EXISTS cliente;
-CREATE EXTERNAL TABLE IF NOT EXISTS cliente (
+CREATE TABLE IF NOT EXISTS cliente (
 	IdCliente			INTEGER,
 	Provincia			VARCHAR(50),
 	Nombre_y_Apellido	VARCHAR(80),
@@ -179,7 +179,7 @@ SELECT
 FROM integrador.cliente;
 
 DROP TABLE IF EXISTS producto;
-CREATE EXTERNAL TABLE IF NOT EXISTS producto (
+CREATE TABLE IF NOT EXISTS producto (
 	IdProducto					INTEGER,
 	Descripcion					VARCHAR(100),
 	Tipo						VARCHAR(50),
@@ -202,7 +202,7 @@ SELECT
 FROM integrador.producto;
 
 DROP TABLE IF EXISTS empleado;
-CREATE EXTERNAL TABLE IF NOT EXISTS empleado (
+CREATE TABLE IF NOT EXISTS empleado (
 	CodigoEmpleado	INTEGER,
 	Apellido		VARCHAR(50),
 	Nombre	        VARCHAR(80),
@@ -230,11 +230,11 @@ SELECT
 	Sucursal,
 	Sector,
 	Cargo,
-	REPLACE(Salario. ',', '.')
+	Salario
 FROM integrador.empleado;
 
 DROP TABLE IF EXISTS sucursal;
-CREATE EXTERNAL TABLE IF NOT EXISTS sucursal (
+CREATE TABLE IF NOT EXISTS sucursal (
 	IdSucursal	INTEGER,
 	Sucursal	VARCHAR(40),
 	Domicilio	VARCHAR(150),
@@ -259,7 +259,7 @@ SELECT
 FROM integrador.sucursal;
 
 DROP TABLE IF EXISTS calendario;
-CREATE EXTERNAL TABLE calendario (
+CREATE TABLE calendario (
         id                      INTEGER,
         fecha                 	DATE,
         anio                    INTEGER,
@@ -280,6 +280,7 @@ SELECT
 	fecha,
 	anio,
 	mes,
+	dia,
 	trimestre,
 	semana,
 	dia_nombre,
@@ -287,7 +288,7 @@ SELECT
 FROM integrador.calendario;
 
 DROP TABLE IF EXISTS proveedor;
-CREATE EXTERNAL TABLE IF NOT EXISTS proveedor (
+CREATE TABLE IF NOT EXISTS proveedor (
 	IDProveedor			INTEGER,
 	Nombre	VARCHAR(40),
 	Address	VARCHAR(150),
@@ -310,45 +311,3 @@ SELECT
 	Pais,
 	Departamento
 FROM integrador.proveedor;
-	
-
-
-
-
-
-
-
---particiones
-DROP TABLE trips_part;
-CREATE EXTERNAL TABLE trips_part(
-	bikeid INT,
-	checkout_time STRING,
-	duration_minutes INT,
-	end_station_id INT,
-	end_station_name STRING,
-	start_station_id INT,
-	start_station_name STRING,
-	start_time TIMESTAMP,
-	subscriber_type STRING,
-	trip_id BIGINT,
-	year INT
-)
-PARTITIONED BY(month INT)
-LOCATION '/user/instructor/data/bikeshare/trips_part/';
-
--- Ejecutar de 1 a 12
-INSERT INTO trips_part
-PARTITION(month=12)
-SELECT bikeid,
-	checkout_time,
-	duration_minutes,
-	end_station_id,
-	end_station_name,
-	start_station_id,
-	start_station_name,
-	start_time,
-	subscriber_type,
-	trip_id,
-	year_modif
-FROM trips_ok
-WHERE month_modif = 12;
